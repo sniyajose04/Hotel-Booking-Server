@@ -23,7 +23,7 @@ try {
     }
 
     switch(type){
-        case "User.created":{
+        case "user.created":{
             await User.create(userData);
             break;
         }
