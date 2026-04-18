@@ -15,11 +15,13 @@ try {
 
     const {data,type}=req.body
 
+    console.log("Webhook type:", type); // ✅ debug
+
     const userData = {
         _id: data.id,
         email: data.email_addresses[0].email_address,
-        username:data.first_name+" "+data.last_name,
-        image:data.image_url,
+        username: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+        image: data.image_url,
     }
 
     switch(type){
@@ -41,13 +43,13 @@ try {
         default:
             break;
     }
-    res.json({success:true,message:"Webhook Recieved"})
+
+    res.json({success:true,message:"Webhook Received"})
 
 } catch (error) {
     console.log(error.message);
     res.json({success:false,message:error.message})
 }
-    
 }
 
 export default clerkWebhooks;
